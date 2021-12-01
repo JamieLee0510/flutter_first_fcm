@@ -1,11 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:test_firebase_message/screem/green_page.dart';
+import 'package:test_firebase_message/screem/red_page.dart';
 
-void main() {
+void main() async {
+  //idgetFlutterBinding用于与 Flutter 引擎交互。
+  // Firebase.initializeApp()需要调用 native 代码来初始化Firebase，
+  //并且由于插件需要使用平台 channel 来调用 native 代码，这是异步完成的，
+  //因此您必须调用ensureInitialized()确保你有一个 WidgetsBinding 的实例.
+  WidgetsFlutterBinding.ensureInitialized(); //why need to ensure
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,12 +32,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        "red": (_) => RedPage(),
+        "green": (_) => GreenPage(),
+      },
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key key, @required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -47,6 +60,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  @override
+  void initState() {
+    //
+    FirebaseMessaging.instance.getInitialMessage();
+
+    //stream 的監聽
+    //only work in the foreground
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        print(message.notification.title);
+        print(message.notification.body);
+      }
+    });
+
+    super.initState();
+  }
 
   void _incrementCounter() {
     setState(() {

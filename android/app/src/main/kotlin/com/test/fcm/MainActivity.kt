@@ -1,4 +1,4 @@
-package com.example.test_firebase_message
+package com.test.fcm
 
 import io.flutter.embedding.android.FlutterActivity
 

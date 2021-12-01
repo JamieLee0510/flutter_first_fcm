@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.test_firebase_message">
+    package="com.test.fcm">
    <application
         android:label="test_firebase_message"
         android:icon="@mipmap/ic_launcher">
