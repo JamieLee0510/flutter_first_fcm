@@ -3,6 +3,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:test_firebase_message/screem/green_page.dart';
 import 'package:test_firebase_message/screem/red_page.dart';
+import 'package:test_firebase_message/services/local_notification_service.dart';
+
+Future firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print('---in background hander');
+  print(message.notification.title);
+}
 
 void main() async {
   //idgetFlutterBinding用于与 Flutter 引擎交互。
@@ -10,7 +16,11 @@ void main() async {
   //并且由于插件需要使用平台 channel 来调用 native 代码，这是异步完成的，
   //因此您必须调用ensureInitialized()确保你有一个 WidgetsBinding 的实例.
   WidgetsFlutterBinding.ensureInitialized(); //why need to ensure
+
   await Firebase.initializeApp();
+
+  /// Set the background messaging handler early on, as a named top-level function
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(MyApp());
 }
 
@@ -63,16 +73,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    //
-    FirebaseMessaging.instance.getInitialMessage();
+    ///初始化LocalNotificationService
+    ///傳context是為了使用Navigator
+    LocalNotificationService.initialize(context);
 
-    //stream 的監聽
-    //only work in the foreground
+    ///give the message which user taps when app is from terminated state
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        final routeFromMessage = message.data['route'];
+        Navigator.of(context).pushNamed(routeFromMessage);
+        print(routeFromMessage);
+      }
+    });
+
+    ///stream 的監聽
+    ///only work in the foreground
     FirebaseMessaging.onMessage.listen((message) {
       if (message.notification != null) {
         print(message.notification.title);
         print(message.notification.body);
       }
+      LocalNotificationService.display(message);
+    });
+
+    ///stream 監聽
+    ///only when app in the background but not close, and
+    ///user tap notification
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final routeFromMessage = message.data['route'];
+      Navigator.of(context).pushNamed(routeFromMessage);
+      print(routeFromMessage);
     });
 
     super.initState();
