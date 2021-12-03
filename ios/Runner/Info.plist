@@ -41,5 +41,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<!-- firebase setting -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+	<!-- firebase setting end-->
+</dict>
 </dict>
 </plist>
