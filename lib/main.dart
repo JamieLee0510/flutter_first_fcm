@@ -89,10 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
       print(routeFromMessage);
     });
 
+    getToken();
+
     super.initState();
   }
-
-  
 
   void _incrementCounter() {
     setState(() {
@@ -108,9 +108,10 @@ class _MyHomePageState extends State<MyHomePage> {
   getToken() async {
     //FirebaseMessaging.instance.requestPermission().then((value) => null);
     token = await FirebaseMessaging.instance.getToken();
-    setState(() {
-      token = token;
-    });
+    // setState(() {
+    //   token = token;
+    // });
+    print("---device token");
     print(token);
   }
 

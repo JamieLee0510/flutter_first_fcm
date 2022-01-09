@@ -37,7 +37,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.test.fcm"
+        applicationId "com.logflows.yusen.ticket"
         //due to firebase services, turn 16 to 23
         minSdkVersion 23
         targetSdkVersion 30

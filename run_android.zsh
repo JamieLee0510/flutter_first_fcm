@@ -1,1 +1,1 @@
-emulator -avd Pixel_3a_API_30_x86
+emulator -avd Pixel_5_API_31-Android12
