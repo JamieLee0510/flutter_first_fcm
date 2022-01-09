@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "332551303279",
+    "firebase_url": "https://ticket-app-yusen.firebaseio.com",
+    "project_id": "ticket-app-yusen",
+    "storage_bucket": "ticket-app-yusen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332551303279:android:d7c755621e3de5b3e2dd9a",
+        "android_client_info": {
+          "package_name": "com.logflows.yusen.ticket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332551303279-eogjg2h3rjgohsgrejvjv7qa09lnm0ba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZFRGiSOAjhD_kkFL-jnYnrIbFdvRhaag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332551303279-eogjg2h3rjgohsgrejvjv7qa09lnm0ba.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
