@@ -97,7 +97,6 @@ class LocalNotificationService {
         android: AndroidNotificationDetails(
           "easyapproach",
           "easyapproach channel",
-          "this is our channel",
           importance: Importance.max,
           priority: Priority.high,
         ),
@@ -106,7 +105,6 @@ class LocalNotificationService {
           AndroidNotificationDetails(
         'channel ID',
         'channel name',
-        'channel description',
         playSound: true,
         priority: Priority.high,
         importance: Importance.high,

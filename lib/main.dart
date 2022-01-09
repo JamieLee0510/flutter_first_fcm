@@ -53,6 +53,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String token;
 
   @override
   void initState() {
@@ -91,6 +92,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+  
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -100,6 +103,15 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  getToken() async {
+    //FirebaseMessaging.instance.requestPermission().then((value) => null);
+    token = await FirebaseMessaging.instance.getToken();
+    setState(() {
+      token = token;
+    });
+    print(token);
   }
 
   @override
